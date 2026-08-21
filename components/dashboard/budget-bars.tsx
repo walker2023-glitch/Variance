@@ -41,14 +41,14 @@ export function BudgetBars({ progress }: { progress: BudgetProgress[] }) {
                   <span className="flex items-center gap-2 tabular-nums text-muted-foreground">
                     {formatCurrency(b.spent)} / {formatCurrency(b.limit_amount)}
                     {tone === "warn" && <Badge variant="warning">≥80%</Badge>}
-                    {tone === "over" && <Badge variant="destructive">Over</Badge>}
+                    {tone === "over" && <Badge variant="over">Over</Badge>}
                   </span>
                 </div>
                 <Progress
                   value={b.percent}
                   indicatorClassName={
                     tone === "over"
-                      ? "bg-destructive"
+                      ? "bg-over"
                       : tone === "warn"
                         ? "bg-warning"
                         : "bg-primary"

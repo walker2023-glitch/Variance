@@ -5,10 +5,10 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import {
   categoryBreakdown,
-  CHART_COLORS,
   rangeBounds,
   type RangeKey,
 } from "@/lib/analytics";
+import { CHART_SERIES } from "@/lib/chart-theme";
 import type { Transaction } from "@/lib/types/database";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,13 +31,18 @@ export function CategoryDonut({ transactions }: { transactions: Transaction[] })
   const total = slices.reduce((s, x) => s + x.amount, 0);
 
   return (
-    <Card>
+    <Card className="border-border/80 shadow-sm">
       <CardHeader className="space-y-3">
-        <CardTitle className="text-base">Spending by category</CardTitle>
+        <div>
+          <p className="label-caps mb-1">Breakdown</p>
+          <CardTitle className="font-display text-lg font-semibold">
+            By category
+          </CardTitle>
+        </div>
         <div
           role="radiogroup"
           aria-label="Time range"
-          className="flex flex-wrap gap-1"
+          className="flex flex-wrap gap-1.5"
         >
           {RANGES.map((r) => (
             <button
@@ -47,10 +52,10 @@ export function CategoryDonut({ transactions }: { transactions: Transaction[] })
               aria-checked={range === r.key}
               onClick={() => setRange(r.key)}
               className={cn(
-                "rounded-full px-3 py-1 text-xs font-medium",
+                "rounded-full px-3 py-1 text-xs font-medium transition-colors",
                 range === r.key
                   ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                  : "bg-muted text-muted-foreground hover:bg-muted/80",
               )}
             >
               {r.label}
@@ -80,12 +85,17 @@ export function CategoryDonut({ transactions }: { transactions: Transaction[] })
                     {slices.map((_, i) => (
                       <Cell
                         key={slices[i].category}
-                        fill={CHART_COLORS[i % CHART_COLORS.length]}
+                        fill={CHART_SERIES[i % CHART_SERIES.length]}
                       />
                     ))}
                   </Pie>
                   <Tooltip
                     formatter={(value) => formatCurrency(Number(value ?? 0))}
+                    contentStyle={{
+                      background: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: "var(--radius)",
+                    }}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -96,7 +106,7 @@ export function CategoryDonut({ transactions }: { transactions: Transaction[] })
                   <span className="flex items-center gap-2">
                     <span
                       className="h-2.5 w-2.5 rounded-full"
-                      style={{ background: CHART_COLORS[i % CHART_COLORS.length] }}
+                      style={{ background: CHART_SERIES[i % CHART_SERIES.length] }}
                     />
                     {s.category}
                   </span>

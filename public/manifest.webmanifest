@@ -1,11 +1,11 @@
 {
   "name": "Variance",
   "short_name": "Variance",
-  "description": "Sub-5-second expense logging with receipt OCR and analytics.",
+  "description": "A frictionless way to track your funds and stabilize your financial path.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#16a34a",
+  "background_color": "#F5F2EB",
+  "theme_color": "#1A3D2D",
   "icons": [
     {
       "src": "/icon.svg",

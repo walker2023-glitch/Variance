@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-muted/30 p-4">
+    <main className="flex min-h-dvh items-center justify-center bg-background p-4">
       <Suspense>
         <LoginForm />
       </Suspense>

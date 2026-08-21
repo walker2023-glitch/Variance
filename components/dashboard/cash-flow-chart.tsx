@@ -12,6 +12,7 @@ import {
 } from "recharts";
 
 import type { CashFlowPoint } from "@/lib/analytics";
+import { CHART_EXPENSE, CHART_INCOME } from "@/lib/chart-theme";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/empty-state";
@@ -20,9 +21,12 @@ export function CashFlowChart({ data }: { data: CashFlowPoint[] }) {
   const hasData = data.some((d) => d.income > 0 || d.expense > 0);
 
   return (
-    <Card>
+    <Card className="border-border/80 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-base">Cash flow (trailing 6 months)</CardTitle>
+        <p className="label-caps mb-1">Trend</p>
+        <CardTitle className="font-display text-lg font-semibold">
+          Cash flow
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {!hasData ? (
@@ -36,20 +40,26 @@ export function CashFlowChart({ data }: { data: CashFlowPoint[] }) {
             <div className="h-64 w-full" aria-hidden="true">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="label" tick={{ fontSize: 12 }} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} className="stroke-border" />
+                  <XAxis dataKey="label" tick={{ fontSize: 12 }} className="fill-muted-foreground" />
                   <YAxis
                     tick={{ fontSize: 12 }}
+                    className="fill-muted-foreground"
                     tickFormatter={(v: number) =>
                       v >= 1000 ? `$${Math.round(v / 1000)}k` : `$${v}`
                     }
                   />
                   <Tooltip
                     formatter={(value) => formatCurrency(Number(value ?? 0))}
+                    contentStyle={{
+                      background: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: "var(--radius)",
+                    }}
                   />
                   <Legend />
-                  <Bar dataKey="income" name="Income" fill="hsl(142 76% 36%)" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="expense" name="Expense" fill="hsl(0 84% 60%)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="income" name="Income" fill={CHART_INCOME} radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="expense" name="Expense" fill={CHART_EXPENSE} radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

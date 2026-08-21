@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { Loader2, Wallet } from "lucide-react";
+import { Loader2 } from "lucide-react";
+
+import { VarianceLogo } from "@/components/brand/variance-logo";
 
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -12,7 +14,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -73,14 +74,9 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader className="space-y-1">
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Wallet className="h-5 w-5" />
-          </div>
-          <CardTitle className="text-xl">Variance</CardTitle>
-        </div>
+    <Card className="w-full max-w-sm border-border/80 shadow-md">
+      <CardHeader className="space-y-3">
+        <VarianceLogo showTagline />
         <CardDescription>
           {mode === "signup"
             ? "Create your account."
@@ -92,7 +88,9 @@ export function LoginForm() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="label-caps">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -106,7 +104,9 @@ export function LoginForm() {
 
           {mode !== "magic" && (
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="label-caps">
+                Password
+              </Label>
               <Input
                 id="password"
                 type="password"

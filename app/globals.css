@@ -4,56 +4,76 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Variance brand — light mode (variance-ui-skill.md) */
+    --background: 42 28% 96%;
+    --foreground: 0 0% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142.1 70.6% 45.3%;
-    --success-foreground: 355.7 100% 97.3%;
-    --warning: 32.1 94.6% 43.7%;
-    --warning-foreground: 0 0% 100%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.6rem;
+    --popover-foreground: 0 0% 10%;
+    --primary: 155 41% 17%;
+    --primary-foreground: 42 28% 96%;
+    --secondary: 72 8% 52%;
+    --secondary-foreground: 155 41% 17%;
+    --muted: 42 18% 92%;
+    --muted-foreground: 72 6% 42%;
+    --accent: 42 65% 60%;
+    --accent-foreground: 155 41% 17%;
+    --destructive: 0 55% 42%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 155 41% 17%;
+    --success-foreground: 42 28% 96%;
+    --warning: 42 65% 60%;
+    --warning-foreground: 155 41% 17%;
+    --over: 28 45% 38%;
+    --over-foreground: 42 28% 96%;
+    --border: 42 14% 88%;
+    --input: 42 14% 88%;
+    --ring: 155 41% 17%;
+    --radius: 0.75rem;
+    --chart-1: 155 41% 17%;
+    --chart-2: 72 8% 52%;
+    --chart-3: 42 65% 60%;
+    --chart-4: 155 25% 35%;
+    --chart-5: 72 12% 65%;
+    --chart-income: 155 41% 17%;
+    --chart-expense: 28 45% 38%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 142.1 70.6% 45.3%;
-    --success-foreground: 144.9 80.4% 10%;
-    --warning: 32.1 94.6% 43.7%;
-    --warning-foreground: 0 0% 100%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.4 71.8% 29.2%;
+    /* Variance brand — dark mode */
+    --background: 220 12% 7%;
+    --foreground: 0 0% 100%;
+    --card: 220 10% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 10% 11%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 148 28% 71%;
+    --primary-foreground: 220 12% 7%;
+    --secondary: 220 8% 18%;
+    --secondary-foreground: 148 28% 71%;
+    --muted: 220 8% 16%;
+    --muted-foreground: 240 2% 65%;
+    --accent: 43 78% 71%;
+    --accent-foreground: 220 12% 7%;
+    --destructive: 0 45% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 148 28% 71%;
+    --success-foreground: 220 12% 7%;
+    --warning: 43 78% 71%;
+    --warning-foreground: 220 12% 7%;
+    --over: 32 55% 55%;
+    --over-foreground: 220 12% 7%;
+    --border: 220 8% 18%;
+    --input: 220 8% 18%;
+    --ring: 148 28% 71%;
+    --chart-1: 148 28% 71%;
+    --chart-2: 43 78% 71%;
+    --chart-3: 148 18% 45%;
+    --chart-4: 220 8% 35%;
+    --chart-5: 43 40% 55%;
+    --chart-income: 148 28% 71%;
+    --chart-expense: 32 55% 55%;
   }
 }
 
@@ -62,6 +82,29 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight text-primary;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  }
+  .label-caps {
+    @apply font-sans text-[11px] font-light uppercase tracking-[0.14em] text-muted-foreground;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

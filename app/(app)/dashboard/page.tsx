@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { cashFlowByMonth } from "@/lib/analytics";
 import { attachBudgetProgress } from "@/lib/spend";
-import { monthsAgoStart } from "@/lib/dates";
+import { monthBounds, monthsAgoStart } from "@/lib/dates";
 import type { Budget, FinancialGoal, Transaction } from "@/lib/types/database";
 import { PageHeader } from "@/components/page-header";
+import { HeroBalance } from "@/components/dashboard/hero-balance";
 import { NeedsConfirmation } from "@/components/dashboard/needs-confirmation";
 import { CashFlowChart } from "@/components/dashboard/cash-flow-chart";
 import { CategoryDonut } from "@/components/dashboard/category-donut";
@@ -16,6 +17,7 @@ export const dynamic = "force-dynamic";
 export default async function DashboardPage() {
   const supabase = await createClient();
   const from = monthsAgoStart(5);
+  const { from: monthStart, to: monthEnd } = monthBounds();
 
   const [
     { data: pending },
@@ -46,23 +48,41 @@ export default async function DashboardPage() {
   const cashFlow = cashFlowByMonth(txs);
   const progress = attachBudgetProgress((budgets ?? []) as Budget[], txs);
 
+  const monthTxs = txs.filter(
+    (t) => t.transaction_date >= monthStart && t.transaction_date <= monthEnd,
+  );
+  const incomeThisMonth = monthTxs
+    .filter((t) => t.type === "deposit")
+    .reduce((s, t) => s + Number(t.amount), 0);
+  const expenseThisMonth = monthTxs
+    .filter((t) => t.type === "expense")
+    .reduce((s, t) => s + Number(t.amount), 0);
+
   return (
-    <div className="mx-auto max-w-6xl space-y-6">
+    <div className="mx-auto max-w-6xl space-y-5">
       <PageHeader
+        eyebrow="Simple / Stable"
         title="Dashboard"
-        description="Cash flow, category mix, limits, and goals."
+        description="One glance at where your money went — and where it's headed."
+      />
+
+      <HeroBalance
+        netThisMonth={incomeThisMonth - expenseThisMonth}
+        incomeThisMonth={incomeThisMonth}
+        expenseThisMonth={expenseThisMonth}
+        sparkline={cashFlow}
       />
 
       <NeedsConfirmation pending={(pending ?? []) as Transaction[]} />
 
       <BudgetBars progress={progress} />
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <CashFlowChart data={cashFlow} />
         <CategoryDonut transactions={txs} />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <GoalProgress goals={(goals ?? []) as FinancialGoal[]} />
         <RecentTransactions transactions={txs} />
       </div>

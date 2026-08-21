@@ -241,7 +241,7 @@ function LimitCard({
           </div>
           <div className="flex items-center gap-2">
             {tone === "warn" && <Badge variant="warning">≥80%</Badge>}
-            {tone === "over" && <Badge variant="destructive">Over</Badge>}
+            {tone === "over" && <Badge variant="over">Over</Badge>}
             <Button size="sm" variant="ghost" onClick={() => onEdit(row)}>
               <Pencil className="h-3.5 w-3.5" />
             </Button>
@@ -254,7 +254,7 @@ function LimitCard({
           value={row.percent}
           indicatorClassName={
             tone === "over"
-              ? "bg-destructive"
+              ? "bg-over"
               : tone === "warn"
                 ? "bg-warning"
                 : "bg-primary"

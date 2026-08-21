@@ -97,18 +97,3 @@ export function rangeBounds(
   }
   return { from: toISODate(new Date(today.getFullYear(), 0, 1)), to };
 }
-
-export const CHART_COLORS = [
-  "hsl(142 76% 36%)",
-  "hsl(32 95% 44%)",
-  "hsl(217 91% 50%)",
-  "hsl(280 67% 47%)",
-  "hsl(0 84% 60%)",
-  "hsl(173 80% 36%)",
-  "hsl(45 93% 47%)",
-  "hsl(199 89% 38%)",
-  "hsl(340 75% 51%)",
-  "hsl(24 75% 47%)",
-  "hsl(250 70% 55%)",
-  "hsl(90 50% 40%)",
-];

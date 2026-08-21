@@ -53,7 +53,7 @@ export function AppNav() {
 
       {/* Mobile: fixed bottom tab bar */}
       <nav
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-6 border-t bg-background/95 backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-6 border-t border-border bg-card/95 backdrop-blur-md md:hidden"
         aria-label="Primary"
       >
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {

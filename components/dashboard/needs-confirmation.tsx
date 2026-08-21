@@ -68,10 +68,11 @@ export function NeedsConfirmation({
 
   return (
     <>
-      <Card className="border-warning/40 bg-warning/5">
+      <Card className="border-accent/30 bg-accent/5 shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">
-            Needs confirmation ({pending.length})
+          <p className="label-caps text-accent-foreground/80">Needs attention</p>
+          <CardTitle className="font-display text-base font-semibold">
+            Confirm recurring ({pending.length})
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">

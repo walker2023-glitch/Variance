@@ -143,7 +143,7 @@ export function QuickEntryForm() {
   }
 
   return (
-    <Card>
+    <Card className="border-border/80 shadow-sm">
       <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Type toggle */}
@@ -162,9 +162,7 @@ export function QuickEntryForm() {
                 className={cn(
                   "rounded-md py-2 text-sm font-medium capitalize transition-colors",
                   form.type === t
-                    ? t === "expense"
-                      ? "bg-background text-destructive shadow-sm"
-                      : "bg-background text-primary shadow-sm"
+                    ? "bg-card text-primary shadow-sm"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -175,7 +173,9 @@ export function QuickEntryForm() {
 
           {/* Amount */}
           <div className="space-y-2">
-            <Label htmlFor="amount">Amount</Label>
+            <Label htmlFor="amount" className="label-caps">
+              Amount
+            </Label>
             <div className="relative">
               <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-semibold text-muted-foreground">
                 $
@@ -191,14 +191,14 @@ export function QuickEntryForm() {
                 placeholder="0.00"
                 value={form.amount}
                 onChange={(e) => update({ amount: e.target.value })}
-                className="h-16 pl-9 text-3xl font-semibold"
+                className="h-16 border-primary/20 pl-9 font-display text-3xl font-bold text-primary"
               />
             </div>
           </div>
 
           {/* Category chips */}
           <div className="space-y-2">
-            <Label>Category</Label>
+            <Label className="label-caps">Category</Label>
             <div
               ref={categoryRef}
               className="flex flex-wrap gap-2"
@@ -216,7 +216,7 @@ export function QuickEntryForm() {
                     "rounded-full border px-3 py-1.5 text-sm transition-colors",
                     form.category === c
                       ? "border-primary bg-primary text-primary-foreground"
-                      : "border-input bg-background hover:bg-accent",
+                      : "border-border bg-card hover:border-primary/30 hover:bg-muted",
                   )}
                 >
                   {c}
@@ -231,8 +231,8 @@ export function QuickEntryForm() {
                   className={cn(
                     "rounded-full border px-3 py-1.5 text-sm transition-colors",
                     form.category === UNORGANIZED_CATEGORY
-                      ? "border-warning bg-warning text-warning-foreground"
-                      : "border-warning/50 bg-warning/10 text-warning",
+                      ? "border-primary/40 bg-muted text-foreground"
+                      : "border-border bg-muted/50 text-muted-foreground hover:border-primary/30",
                   )}
                 >
                   {UNORGANIZED_CATEGORY}
